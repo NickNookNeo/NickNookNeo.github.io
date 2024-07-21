@@ -1,18 +1,14 @@
-name: Mirror Repo
-on:
-  schedule:
-    # nightly (0th hour 0th minute of every day)
-    - cron:  '0 0 * * *'
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Mirror
-      run: |
-        git clone --mirror '$REPO'
-        cd mux.git/
-        git remote add github "https://github.com/NickNookNeo/NickNookNeo.git"
-        git push --mirror github
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            - name: Mirroring Branch
+  # You may pin to the exact commit or the version.
+  # uses: codyde/branch-mirroring-action@4e3587b7e71525d7701e7bc75b220adada28213e
+  uses: codyde/branch-mirroring-action@v10
+  with:
+    # SSH private key for ssh connection to the target repository
+    ssh_private_key: # optional
+    # Target url
+    target_repo_url: https://github.com/NickNookNeo/NickNookNeo.git 
+    # Username for ssh connection
+    ssh_username: # optional, default is git
+    # The branch ID for the source
+    source_branch_id: # optional, default is codecommit-demo-
+          
